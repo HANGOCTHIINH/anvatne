@@ -169,9 +169,17 @@
                 <div class="form-group"><label for="mood">Tông màu/Cảm xúc</label><select id="mood" name="mood"><option value="standard">Bình thường</option><option value="dramatic, epic, intense">Kịch tính & Bi tráng</option><option value="romantic, dreamy, soft">Lãng mạn & Mơ mộng</option><option value="mysterious, dark, eerie">Huyền bí & U ám</option><option value="sensual, intimate, artistic nude study">Gợi cảm & Tinh tế</option></select></div>
                 <div class="form-group"><label for="aspect-ratio">Định dạng khung ảnh</label><select id="aspect-ratio" name="aspect-ratio"><option value="--ar 1:1">Vuông (1:1)</option><option value="--ar 16:9">Ngang (16:9)</option><option value="--ar 9:16">Dọc (9:16)</option></select></div>
                 <div class="form-group"><label for="details">Chi tiết bổ sung (tiếng Việt)</label><textarea id="details" name="details" placeholder="Ví dụ: nước mắt pha lê lăn trên má"></textarea></div>
-                <!-- ✨ TÍNH NĂNG MỚI: PROMPT PHỦ ĐỊNH ✨ -->
                 <div class="form-group"><label for="negative-prompt">Prompt Phủ định (Những gì KHÔNG muốn thấy)</label><textarea id="negative-prompt" name="negative-prompt" placeholder="Ví dụ: xấu xí, biến dạng, thừa ngón tay, chữ ký, logo"></textarea></div>
-                <div class="form-group"><div class="label-with-action"><label for="api-key">API Key của Gemini</label><button type="button" id="change-api-key-btn" class="link-btn hidden">Thay đổi</button></div><input type="password" id="api-key" name="api-key" placeholder="Nhập và lưu API Key của bạn"></div>
+                
+                <!-- API Key Input Restored -->
+                <div class="form-group">
+                    <div class="label-with-action">
+                        <label for="api-key">API Key của Gemini</label>
+                        <button type="button" id="change-api-key-btn" class="link-btn hidden">Thay đổi</button>
+                    </div>
+                    <input type="password" id="api-key" name="api-key" placeholder="Nhập và lưu API Key của bạn">
+                </div>
+
                 <button type="submit" class="btn btn-primary">Tạo Prompt</button>
                 <div id="form-message" class="message hidden"></div>
             </form>
@@ -192,7 +200,6 @@
                 <div id="variations-loader" class="loader hidden"></div>
                 <div id="variations-result"></div>
             </div>
-            <!-- ✨ TÍNH NĂNG MỚI: LỊCH SỬ SÁNG TẠO ✨ -->
             <div id="history-section" class="hidden">
                 <div class="label-with-action">
                     <h3>Lịch sử Sáng tạo</h3>
@@ -419,7 +426,8 @@
             }
 
             async function callGeminiApi(prompt, apiKey, schema = null) {
-                const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+                // UPDATED: Using the latest model version
+                const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
                 
                 const requestBody = {
                     contents: [{ parts: [{ text: prompt }] }],
@@ -544,4 +552,3 @@
     </script>
 </body>
 </html>
-
